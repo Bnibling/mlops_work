@@ -1,0 +1,42 @@
+DATASET:
+  root_dataset: /home/jovyan/work/BHVD/data/ssm_training/
+  list_train: /home/jovyan/work/BHVD/data/ssm_training/data_random_split_v2/train/train.odgt
+  list_val: /home/jovyan/work/BHVD/data/ssm_training/data_random_split_v2/val/val.odgt
+  num_class: 3
+  imgSizes: (300, 375, 450, 525, 600)
+  imgMaxSize: 1000
+  padding_constant: 32
+  segm_downsampling_rate: 4
+  random_flip: false
+  preprocess: None
+
+MODEL:
+  arch_encoder: hrnetv2
+  arch_decoder: c1
+  fc_dim: 720
+
+TRAIN:
+  batch_size_per_gpu: 2
+  num_epoch: 100
+  start_epoch: 0
+  epoch_iters: 20
+  optim: SGD
+  lr_encoder: 0.01
+  lr_decoder: 0.01
+  lr_pow: 0.9
+  beta1: 0.9
+  weight_decay: 1e-4
+  deep_sup_scale: 0.4
+  fix_bn: false
+  workers: 16
+  disp_iter: 20
+  seed: 304
+
+VAL:
+  visualize: true
+  checkpoint: epoch_97.pth
+
+TEST:
+  checkpoint: epoch_97.pth
+  result: /media/mortesx1/shared_data/BHVD/work_rafael/data/ASD/sample_outputs
+DIR: ./weights
